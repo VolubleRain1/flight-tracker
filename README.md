@@ -1,11 +1,16 @@
-# Flight Watcher v2
+# Flight Watcher v3
 
-Alerts:
-- ALL aircraft near home (default ceiling 15,000 ft)
-- Military aircraft projected near LaVell Edwards Stadium
-- N130TP active near PVU and projected toward home
+Drop-in replacement for v2.
 
-Recommended deployment: Git-backed Portainer stack.
-Required Portainer env vars: DISCORD_WEBHOOK_URL, HOME_LAT, HOME_LON.
-Leave SEND_STARTUP_TEST=true for first deploy, then set false and redeploy.
-Do not commit your real .env file.
+Main change: predictive home and stadium alerts now require:
+- heading toward the target within a configurable angular tolerance
+- multiple consecutive samples showing decreasing distance
+- projected closest approach inside the configured radius
+- ETA inside the configured warning window
+
+Required Portainer variables:
+- DISCORD_WEBHOOK_URL
+- HOME_LAT
+- HOME_LON
+
+Recommended defaults are already in docker-compose.yml.
